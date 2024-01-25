@@ -3,12 +3,18 @@ import { useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
 import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 
 const ProductScreen = () => {
-  const { id: productId } = useParams(); 
+  const { id: productId } = useParams();
 
-  const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProductDetailsQuery(productId);
 
   return (
     <>
@@ -16,10 +22,12 @@ const ProductScreen = () => {
         Go Back
       </Link>
 
-      { isLoading ? (
-        <h2>Loading....</h2>
+      {isLoading ? (
+        <Loader />
       ) : error ? (
-        <div>{ error?.data?.message || error.error }</div>
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <Row>
           <Col md={5}>
@@ -37,7 +45,9 @@ const ProductScreen = () => {
                 />
               </ListGroup.Item>
               <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-              <ListGroup.Item>Description: {product.description}</ListGroup.Item>
+              <ListGroup.Item>
+                Description: {product.description}
+              </ListGroup.Item>
             </ListGroup>
           </Col>
           <Col md={3}>
@@ -56,14 +66,19 @@ const ProductScreen = () => {
                     <Col>Status:</Col>
                     <Col>
                       <strong>
-                        ${product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                        $
+                        {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
                       </strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                  <Button className='btn-block' type='button' disabled={product.countInStock === 0}>
+                  <Button
+                    className="btn-block"
+                    type="button"
+                    disabled={product.countInStock === 0}
+                  >
                     Add To Cart
                   </Button>
                 </ListGroup.Item>
@@ -71,7 +86,7 @@ const ProductScreen = () => {
             </Card>
           </Col>
         </Row>
-      ) }     
+      )}
     </>
   );
 };

@@ -8,7 +8,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import { savePaymentMethod } from '../slices/cartSlice';
 
 const PaymentScreen = () => {
-  const [paymentMethod, savePaymentMethod] = useState('PayPal');
+  const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

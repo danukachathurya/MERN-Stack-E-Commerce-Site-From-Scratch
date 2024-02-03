@@ -26,7 +26,7 @@ const PaymentScreen = () => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     navigate('/placeorder');
-  }
+  };
 
   return (
     <FormContainer>

@@ -62,9 +62,7 @@ const OrderScreen = () => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">
-                  Paid on {order.paidAt}
-                </Message>
+                <Message variant="success">Paid on {order.paidAt}</Message>
               ) : (
                 <Message variant="danger">Not Paid</Message>
               )}
@@ -78,13 +76,14 @@ const OrderScreen = () => {
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
                     <Col>
-                      <Link to={`/product/${item.product}`}>
-                        {item.name}
-                      </Link>
+                    <Link to={`/products/${item.product}`}>
+                          {item.name}
+                    </Link>
                     </Col>
                     <Col md={4}>
-                      {item.qty} x ${item.price} = ${ item.qty * item.price }
-                    </Col>
+                      {item.qty} x ${item.price} = $
+                          {item.qty * item.price }
+                      </Col>
                   </Row>
                 </ListGroup.Item>
               ))}
@@ -93,16 +92,16 @@ const OrderScreen = () => {
         </Col>
         <Col md={4}>
           <Card>
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
-              
+
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
                   <Col>${order.itemsPrice}</Col>
-                </Row>
+                </Row>             
 
                 <Row>
                   <Col>Shipping</Col>
